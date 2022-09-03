@@ -1,0 +1,29 @@
+== Задание 1
+
+create or replace function
+select_orders_by_item_name(item_name character varying)
+returns table (order_id int, customer character varying, items_count int) as $BODY$ 
+
+select oi.order_id as row_id, c."name", count(*)
+from orders o
+join orderitems oi on o.row_id = oi.order_id
+join customers c on o.customer_id = c.row_id 
+where oi.order_id is not null and oi."name" = $1
+group by oi.order_id , c."name"
+$BODY$
+LANGUAGE sql;
+
+
+== Задание 2
+-
+
+
+== Задание 3
+
+select c."name"
+from orders o
+join orderitems oi on o.row_id = oi.order_id
+join customers c on c.row_id = o.customer_id
+where o.registered_at between '2020/01/01' and '2020/12/31'
+group by c."name", o.customer_id
+having count(distinct oi.order_id) = count(distinct case when oi."name" = 'Кассовый аппарат' then order_id end)
