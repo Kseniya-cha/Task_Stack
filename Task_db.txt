@@ -1,3 +1,5 @@
+Выполнено в PostgreSQL
+
 == Задание 1
 
 create or replace function
