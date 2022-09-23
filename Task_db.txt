@@ -16,10 +16,6 @@ $BODY$
 LANGUAGE sql;
 
 
-== Задание 2
--
-
-
 == Задание 3
 
 select c."name"
